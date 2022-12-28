@@ -322,3 +322,28 @@ const allBackpacks = input.split("\n");
 const backpacks = allBackpacks.map(getBackpackPoint);
 
 console.log(sum);
+
+// part 2
+const groupPacks = arr => {
+  const groups = [];
+  for(let i = 0; i < arr.length; i+=3) {
+    groups.push(arr.slice(i, i + 3));
+  }
+  return groups;
+};
+
+let badgeSums = 0;
+const badgeGroup = grouping => {
+  const [pack1, pack2, pack3] = [grouping[0], grouping[1], grouping[2]];
+  for(const letter in pack1) {
+    if(pack2.includes(pack1[letter]) && pack3.includes(pack1[letter])) {
+      // console.log(pack1[letter])
+      badgeSums +=(values.indexOf(pack1[letter]) + 1);
+      return badgeSums;
+    }
+  }
+};
+
+const badgePack = input.split("\n");
+groupPacks(badgePack).map(badgeGroup);
+console.log(badgeSums);
